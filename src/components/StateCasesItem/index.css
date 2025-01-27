@@ -1,0 +1,38 @@
+.state-case-table {
+  width: 75vw;
+  border: 1px solid #475569;
+  background: #1e1e30;
+  box-shadow: 0px 4px 16px 0px #00000029;
+  border-radius: 5px;
+  color: #fff;
+  padding-bottom: 15px;
+}
+
+.table-heading {
+  height: 50px;
+}
+.sort-button {
+  background-color: transparent;
+  color: #fff;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  padding-top: 5px;
+}
+.hr-line {
+  border: 1px solid #475569;
+  width: 246%;
+}
+.table-body {
+  height: 40px;
+  direction: rtl;
+  font-size: 14px;
+}
+td {
+  padding-right: 55px;
+}
+.state-name {
+  direction: ltr;
+  width: 350px;
+  padding-right: auto;
+}

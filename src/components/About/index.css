@@ -1,0 +1,119 @@
+.about-bg-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+  background-color: #161625;
+  margin: 0px;
+}
+.about-container {
+  overflow: auto;
+  padding: 40px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.about-heading-container {
+  margin-top: 10vh;
+}
+.about-heading {
+  font-family: Roboto;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 64px;
+  text-align: left;
+  color: #f8fafc;
+}
+.about-date {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #94a3b8;
+}
+.about-content-container {
+  display: flex;
+}
+
+.faq-container {
+  width: 70vw;
+  padding-right: 25px;
+}
+
+.faq-heading {
+  font-family: Roboto;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #e2e8f0;
+}
+.faq-list {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+.faq-question {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #94a3b8;
+}
+.faq-answer {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #007bff;
+}
+.faq-answer::first-letter {
+  padding-left: 25px;
+}
+.factoids-list {
+  padding: 10px;
+  list-style-type: none;
+  margin: 0px;
+  background-color: #00000030;
+  border: #94a3b8 1px dotted;
+  border-radius: 5px;
+  width: 30vw;
+  overflow: auto;
+}
+
+@media (max-width: 769px) {
+  .about-content-container {
+    flex-direction: column;
+  }
+  .faq-container {
+    width: 95vw;
+    padding-right: 0px;
+  }
+  .factoids-list {
+    width: 95vw;
+  }
+
+  .about-container {
+    padding: 10px;
+  }
+}
+.banner {
+  font-family: Roboto;
+  font-size: 12px;
+  color: #fff;
+  margin: 10px;
+  font-weight: normal;
+}
+.banner::first-letter {
+  padding-left: 5px;
+}

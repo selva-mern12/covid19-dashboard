@@ -1,0 +1,19 @@
+.map-container {
+  height: 120%;
+  width: 50%;
+  transform-origin: 0 0;
+  transform: scale(0.5);
+}
+.india-state {
+  fill: #cecdcd;
+  stroke: #000000;
+}
+.india-state:hover {
+  fill: #006284;
+  transition: 0.6s;
+  cursor: pointer;
+}
+.active-state {
+  fill: #ffffff;
+  stroke: #000000;
+}
