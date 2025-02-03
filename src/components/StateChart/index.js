@@ -22,7 +22,7 @@ const StateChart = ({caseChart}) => {
             month: 'short',
           })
           return {
-            date: `${parsedDate.getDate()} ${monthName}`,
+            date: `${parsedDate.getDate()} ${monthName} \n ${parsedDate.getFullYear()}`,
             confirmed: data.total.confirmed,
             recovered: data.total.recovered,
             deceased: data.total.deceased,
@@ -43,8 +43,13 @@ const StateChart = ({caseChart}) => {
     switch (caseChart) {
       case 'confirmed':
         return (
-          <BarChart width={1200} height={500} data={stateCaseDetails}>
-            <XAxis dataKey="date" />
+          <BarChart
+            width={1200}
+            height={500}
+            data={stateCaseDetails}
+            testid="stateSpecificConfirmedCasesContainer"
+          >
+            <XAxis dataKey="date" interval={10} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="confirmed" fill="#9A0E31" />
@@ -52,8 +57,13 @@ const StateChart = ({caseChart}) => {
         )
       case 'active':
         return (
-          <BarChart width={1200} height={500} data={stateCaseDetails}>
-            <XAxis dataKey="date" />
+          <BarChart
+            width={1200}
+            height={500}
+            data={stateCaseDetails}
+            testid="stateSpecificActiveCasesContainer"
+          >
+            <XAxis dataKey="date" interval={10} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="active" fill="#0A4FA0" />
@@ -61,8 +71,13 @@ const StateChart = ({caseChart}) => {
         )
       case 'recovered':
         return (
-          <BarChart width={1200} height={500} data={stateCaseDetails}>
-            <XAxis dataKey="date" />
+          <BarChart
+            width={1200}
+            height={500}
+            data={stateCaseDetails}
+            testid="stateSpecificRecoveredCasesContainer"
+          >
+            <XAxis dataKey="date" interval={10} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="recovered" fill="#216837" />
@@ -70,8 +85,13 @@ const StateChart = ({caseChart}) => {
         )
       case 'deceased':
         return (
-          <BarChart width={1200} height={500} data={stateCaseDetails}>
-            <XAxis dataKey="date" />
+          <BarChart
+            width={1200}
+            height={500}
+            data={stateCaseDetails}
+            testid="stateSpecificDeceasedCasesContainer"
+          >
+            <XAxis dataKey="date" interval={10} />
             <YAxis />
             <Tooltip />
             <Bar dataKey="deceased" fill="#474C57" />

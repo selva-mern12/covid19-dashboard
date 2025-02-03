@@ -151,3 +151,17 @@
   font-size: 16px;
   color: #94a3b8;
 }
+.line-charts {
+  width: 80vw;
+  font-family: Roboto;
+  font-size: 15px;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+.tested {
+  color: #9673b9;
+}
+.teste-bg {
+  background-color: #230f41;
+}

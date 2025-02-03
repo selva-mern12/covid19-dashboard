@@ -9,6 +9,7 @@
   padding: 0px 100px;
   position: fixed;
   z-index: 1;
+  margin: 0px;
 }
 @media (max-width: 769px) {
   .header-container {
@@ -40,6 +41,7 @@
   color: #fff;
   text-decoration: none;
   margin-left: 30px;
+  cursor: pointer;
 }
 .footer-container {
   display: flex;

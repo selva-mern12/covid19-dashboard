@@ -1,0 +1,126 @@
+.vaccination-bg-container {
+  height: 100vh;
+  width: 100vw;
+  background-color: #161625;
+  margin: 0px;
+  padding: 0px;
+}
+.vaccination-main-container {
+  padding: 15vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+.vaccination-heading {
+  font-family: Roboto;
+  font-size: 45px;
+  color: #ffffff;
+  font-weight: 500;
+}
+.state-district-drop-down {
+  text-align: right;
+}
+.state-district-menu {
+  background-color: #2f2f43;
+  padding: 5px;
+  border-radius: 7px;
+  margin: 15px;
+  color: #ffffff;
+  height: 40px;
+  width: 20%;
+  cursor: pointer;
+  outline: none;
+}
+.site-dose-main-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.site-dose-container {
+  display: flex;
+  background-color: #ffffff20;
+  border-radius: 15px;
+  padding: 15px;
+  width: 45%;
+}
+.site-dose-img {
+  height: 45px;
+  margin-right: 12px;
+}
+.site-dose-inner-container {
+  display: flex;
+  flex-direction: column;
+}
+.site-dose-title {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #cbd5e1;
+  margin: 0px;
+  padding: 0px;
+}
+.site-dose-total {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #ffffff;
+  margin: 0px;
+  padding: 0px;
+}
+.site-dose-category-container {
+  display: flex;
+  margin-top: 20px;
+}
+.categories {
+  margin-right: 25px;
+}
+.site-dose-category {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #cbd5e1;
+  margin: 0px;
+  padding: 0px;
+}
+.site-dose-count {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #e2e8f0;
+  margin: 0px;
+  padding: 0px;
+}
+.piechart-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 30px;
+}
+.piechart {
+  background-color: #1e1e30;
+  width: 45%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}

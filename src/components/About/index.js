@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import {MdDoubleArrow} from 'react-icons/md'
 
-import {Header, Footer} from '../HeaderFooter'
+import Header from '../Header'
+import Footer from '../Footer'
 import {LoadingView, FailureView} from '../UnsuccessPage'
 import './index.css'
 
@@ -36,7 +37,7 @@ const About = () => {
   const renderAboutPage = () => {
     switch (aboutStatus) {
       case pageStatus.loading:
-        return <LoadingView />
+        return <LoadingView dataTestId="aboutRouteLoader" />
       case pageStatus.failure:
         return <FailureView />
       case pageStatus.success:
@@ -46,7 +47,7 @@ const About = () => {
               <h3 className="faq-heading">
                 COVID-19 vaccines be ready for distribution
               </h3>
-              <ul className="faq-list">
+              <ul className="faq-list" testid="faqsUnorderedList">
                 {aboutDetails.faqs.map(faq => (
                   <li key={faq.qno}>
                     <p className="faq-question">

@@ -9,7 +9,22 @@
 }
 
 .table-heading {
+  list-style-type: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   height: 50px;
+  margin: 0px;
+  padding: 0px 20px;
+}
+.state-ut {
+  width: 20vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .sort-button {
   background-color: transparent;
@@ -21,18 +36,28 @@
 }
 .hr-line {
   border: 1px solid #475569;
-  width: 246%;
+  width: 100%;
+}
+.state-details {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
 }
 .table-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   height: 40px;
-  direction: rtl;
-  font-size: 14px;
-}
-td {
-  padding-right: 55px;
+  width: 75vw;
+  margin: 0px;
+  padding: 0px;
 }
 .state-name {
   direction: ltr;
-  width: 350px;
-  padding-right: auto;
+  width: 20vw;
+}
+.table-row {
+  width: 10vw;
+  text-align: right;
 }

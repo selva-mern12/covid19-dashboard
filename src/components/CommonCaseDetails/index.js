@@ -1,12 +1,7 @@
 const CommonCaseDetails = props => {
-  const {caseDetails, getCase = null, caseChart = undefined} = props
+  const {caseDetails, getCase = null, caseChart = undefined, country} = props
   console.log(caseChart)
-  const {
-    confirmed = '34285612',
-    deceased = '458470',
-    recovered = '33661339',
-  } = caseDetails
-  const active = confirmed - (deceased + recovered)
+  const {confirmed, deceased, recovered, active} = caseDetails
   return (
     <div className="case-group">
       <div
@@ -18,11 +13,20 @@ const CommonCaseDetails = props => {
         onClick={
           typeof getCase === 'function' ? () => getCase('confirmed') : undefined
         }
+        testid={
+          country
+            ? 'countryWideConfirmedCases'
+            : 'stateSpecificConfirmedCasesContainer'
+        }
       >
         <p className="case-head">Confirmed</p>
         <img
           src="https://i.ibb.co/9Vgx5NB/check-mark-1.png"
-          alt="check-mark"
+          alt={
+            country
+              ? 'country wide confirmed cases pic'
+              : 'state specific confirmed cases pic'
+          }
           className="case-img"
         />
         <p className="case-count">{confirmed}</p>
@@ -36,11 +40,20 @@ const CommonCaseDetails = props => {
         onClick={
           typeof getCase === 'function' ? () => getCase('active') : undefined
         }
+        testid={
+          country
+            ? 'countryWideActiveCases'
+            : 'stateSpecificActiveCasesContainer'
+        }
       >
         <p className="case-head">Active</p>
         <img
           src="https://i.ibb.co/qknm8f0/protection-1.png"
-          alt="protection-1"
+          alt={
+            country
+              ? 'country wide active cases pic'
+              : 'state specific active cases pic'
+          }
           className="case-img"
         />
         <p className="case-count">{active}</p>
@@ -54,11 +67,20 @@ const CommonCaseDetails = props => {
         onClick={
           typeof getCase === 'function' ? () => getCase('recovered') : undefined
         }
+        testid={
+          country
+            ? 'countryWideRecoveredCases'
+            : 'stateSpecificRecoveredCasesContainer'
+        }
       >
         <p className="case-head">Recoverd</p>
         <img
           src="https://i.ibb.co/rHB47jp/recovered-1.png"
-          alt="recovered-1"
+          alt={
+            country
+              ? 'country wide recovered cases pic'
+              : 'state specific recovered cases pic'
+          }
           className="case-img"
         />
         <p className="case-count">{recovered}</p>
@@ -72,11 +94,20 @@ const CommonCaseDetails = props => {
         onClick={
           typeof getCase === 'function' ? () => getCase('deceased') : undefined
         }
+        testid={
+          country
+            ? 'countryWideDeceasedCases'
+            : 'stateSpecificDeceasedCasesContainer'
+        }
       >
         <p className="case-head">Deceased</p>
         <img
           src="https://i.ibb.co/rQr5jjc/breathing-1.png"
-          alt="breathing-1"
+          alt={
+            country
+              ? 'country wide deceased cases pic'
+              : 'state specific deceased cases pic'
+          }
           className="case-img"
         />
         <p className="case-count">{deceased}</p>

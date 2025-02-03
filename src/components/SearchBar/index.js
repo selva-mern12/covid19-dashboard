@@ -37,11 +37,14 @@ const SearchBar = () => {
                 value={userSearch}
                 onChange={event => setUsersearch(event.target.value)}
                 onMouseMove={() => setisShowSearchBar(true)}
-                placeholder="Enter the State"
+                placeholder="Enter the State..."
               />
             </div>
             {isShowSearchBar && (
-              <ul className="search-bar-container">
+              <ul
+                className="search-bar-container"
+                testid="searchResultsUnorderedList"
+              >
                 {filterStateList.map(state => (
                   <li
                     key={state.state_code}

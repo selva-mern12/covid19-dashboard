@@ -6,6 +6,7 @@ import './index.css'
 
 const StateCaseItem = props => {
   const {stateCasesDetails} = props
+  console.log(stateCasesDetails)
   const [sortState, setSortState] = useState(true)
 
   return (
@@ -16,13 +17,13 @@ const StateCaseItem = props => {
           ? [...statesList].sort()
           : [...statesList].reverse()
         return (
-          <table className="state-case-table">
-            <thead>
-              <tr className="table-heading">
-                <th>
+          <div className="state-case-table" testid="stateWiseCovidDataTable">
+            <ul className="table-heading">
+              <li>
+                <p className="state-ut">
                   States/UT{' '}
                   <button
-                    testid="ascendingSort"
+                    testid={sortState ? 'ascendingSort' : 'descendingSort'}
                     className="sort-button"
                     type="button"
                     onClick={() => setSortState(prevState => !prevState)}
@@ -33,16 +34,26 @@ const StateCaseItem = props => {
                       <FcGenericSortingDesc style={{paddingTop: '5'}} />
                     )}
                   </button>
-                </th>
-                <th>Confirmed</th>
-                <th>Active</th>
-                <th>Recoverd</th>
-                <th>Deceased</th>
-                <th>Population</th>
-              </tr>
-            </thead>
+                </p>
+              </li>
+              <li>
+                <p>Confirmed</p>
+              </li>
+              <li>
+                <p>Active</p>
+              </li>
+              <li>
+                <p>Recoverd</p>
+              </li>
+              <li>
+                <p>Deceased</p>
+              </li>
+              <li>
+                <p>Population</p>
+              </li>
+            </ul>
             <hr className="hr-line" />
-            <tbody>
+            <ul className="state-details">
               {sortedState.map(state => {
                 const stateDetails = stateCasesDetails[state.state_code]
                 const caseDetails = {
@@ -60,25 +71,25 @@ const StateCaseItem = props => {
                 const {confirmed, deceased, recovered, population} = caseDetails
 
                 return (
-                  <tr className="table-body">
+                  <li className="table-body" key={state.state_code}>
                     <Link
                       to={`/state/${state.state_code}`}
                       className="nav-link"
                     >
-                      <td className="state-name">{state.state_name}</td>
+                      <p className="state-name">{state.state_name}</p>
                     </Link>
-                    <td className="confirmed">{confirmed}</td>
-                    <td className="active">
+                    <p className="confirmed table-row">{confirmed}</p>
+                    <p className="active table-row">
                       {confirmed - (deceased + recovered)}
-                    </td>
-                    <td className="recovered">{recovered}</td>
-                    <td className="deceased">{deceased}</td>
-                    <td className="population">{population}</td>
-                  </tr>
+                    </p>
+                    <p className="recovered table-row">{recovered}</p>
+                    <p className="deceased table-row">{deceased}</p>
+                    <p className="population table-row">{population}</p>
+                  </li>
                 )
               })}
-            </tbody>
-          </table>
+            </ul>
+          </div>
         )
       }}
     </CovidContext.Consumer>
