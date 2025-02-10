@@ -4,10 +4,28 @@
   flex-direction: column;
   background-size: cover;
   background-color: #161625;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.home-bg-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  margin-top: 10vh;
 }
 
-::-webkit-scrollbar {
-  display: none;
+.home-bg-container::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.home-bg-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.home-bg-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .home-container {
@@ -45,6 +63,28 @@
 }
 .case-count {
   font-size: 30px;
+}
+@media (max-width: 769px) {
+  .case-container {
+    width: 100px;
+  }
+  .case-head {
+    font-size: 12px;
+  }
+  .case-img {
+    height: 30px;
+  }
+  .case-count {
+    font-size: 16px;
+  }
+  .case-group {
+    margin: 0px;
+    height: 150px;
+  }
+  .home-container {
+    margin-top: 15vh;
+    position: relative;
+  }
 }
 .confirmed {
   color: #ff073a;

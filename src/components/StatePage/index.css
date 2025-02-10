@@ -3,7 +3,29 @@
   width: 100vw;
   background-color: #161625;
   margin: 0px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.statepage-bg-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  margin-top: 10vh;
+}
+
+.statepage-bg-container::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.statepage-bg-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.statepage-bg-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .state-main-page {
   margin-top: 10vh;
@@ -26,8 +48,6 @@
 .state-head {
   font-family: Roboto;
   font-size: 48px;
-  font-weight: 500;
-  line-height: 64px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -38,8 +58,6 @@
 .last-update {
   font-family: Roboto;
   font-size: 18px;
-  font-weight: 400;
-  line-height: 24px;
   text-align: left;
   text-underline-position: from-font;
   text-decoration-skip-ink: none;
@@ -77,11 +95,11 @@
   padding: 0px;
 }
 .map-area {
-  height: 60vh;
+  height: 70vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   margin: 10px 100px;
   margin-bottom: 20px;
@@ -164,4 +182,55 @@
 }
 .teste-bg {
   background-color: #230f41;
+}
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+@media (max-width: 769px) {
+  .state-main-page {
+    padding: 15px 20px;
+  }
+  .state-head {
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+  }
+  .last-update {
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+  }
+  .tested-head {
+    font-size: 15px;
+  }
+  .tested {
+    font-size: 18px;
+  }
+  .map-area {
+    height: auto;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0px;
+  }
+  .state-details {
+    width: 80vw;
+  }
+  .line-charts {
+    width: 100vw;
+    font-family: Roboto;
+    font-size: 15px;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+  }
+  .tested {
+    color: #9673b9;
+  }
+  .teste-bg {
+    background-color: #230f41;
+  }
 }

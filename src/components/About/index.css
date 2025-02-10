@@ -8,11 +8,30 @@
   margin: 0px;
 }
 .about-container {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 40px;
 }
-::-webkit-scrollbar {
-  display: none;
+
+.about-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  margin-top: 10vh;
+}
+
+.about-container::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.about-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.about-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .about-heading-container {
   margin-top: 10vh;
@@ -88,7 +107,8 @@
   border: #94a3b8 1px dotted;
   border-radius: 5px;
   width: 30vw;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 @media (max-width: 769px) {

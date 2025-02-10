@@ -52,8 +52,8 @@ const Map = () => {
               strokeWidth=".5"
               version="1.2"
               viewBox="0 0 1000 1000"
-              height="1000"
-              width="1000"
+              height={window.innerWidth > 769 ? 1200 : 800}
+              width={window.innerWidth > 769 ? 1200 : 800}
               preserveAspectRatio="xMidYMid meet"
               xmlns="http://www.w3.org/2000/svg"
             >

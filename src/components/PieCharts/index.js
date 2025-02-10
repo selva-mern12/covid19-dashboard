@@ -33,13 +33,34 @@ const CustomTooltip = ({active, payload}) => {
 }
 
 export const PieCharts = ({data, colors, ageVaccine}) => (
-  <PieChart width={500} height={ageVaccine ? 500 : 250}>
+  <PieChart
+    width={window.innerWidth > 769 ? 500 : 250}
+    height={
+      window.innerWidth > 769
+        ? ageVaccine
+          ? 500
+          : 250
+        : ageVaccine
+        ? 400
+        : 200
+    }
+  >
     <Pie
       data={data}
       cx="50%"
       cy={ageVaccine ? '50%' : '90%'}
-      outerRadius={ageVaccine ? 200 : 160}
-      innerRadius={ageVaccine ? 0 : 120}
+      outerRadius={
+        window.innerWidth > 769
+          ? ageVaccine
+            ? 200
+            : 160
+          : ageVaccine
+          ? 120
+          : 90
+      }
+      innerRadius={
+        window.innerWidth > 769 ? (ageVaccine ? 0 : 120) : ageVaccine ? 0 : 65
+      }
       startAngle={ageVaccine ? 360 : 180}
       endAngle={0}
       fill="#8884d8"
@@ -94,12 +115,8 @@ export const LineCharts = ({topic, dateCaseDetails, color}) => {
       <p className={`line-chart-topic ${headingColor}`}>
         {topic === 'teste' ? 'tested' : topic}
       </p>
-      <ResponsiveContainer
-        width="100%"
-        height={400}
-        testid="lineChartsContainer"
-      >
-        <LineChart data={dateCaseDetails}>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={dateCaseDetails} testid="lineChartsContainer">
           <XAxis dataKey="date" interval={10} />
           <YAxis
             domain={['dataMin', 'dataMax']}

@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {BarChart, Bar, XAxis, YAxis, Tooltip} from 'recharts'
 
+import './index.css'
+
 const StateChart = ({caseChart}) => {
   const [stateCaseDetails, setStateCaseDetails] = useState([])
   const {stateCode = 'TN'} = useParams()
@@ -44,13 +46,13 @@ const StateChart = ({caseChart}) => {
       case 'confirmed':
         return (
           <BarChart
-            width={1200}
-            height={500}
+            width={window.innerWidth >= 769 ? 1200 : 400}
+            height={window.innerWidth >= 769 ? 500 : 300}
             data={stateCaseDetails}
             testid="stateSpecificConfirmedCasesContainer"
           >
             <XAxis dataKey="date" interval={10} />
-            <YAxis />
+            <YAxis tickFormatter={value => `${value / 1000}k`} />
             <Tooltip />
             <Bar dataKey="confirmed" fill="#9A0E31" />
           </BarChart>
@@ -58,8 +60,8 @@ const StateChart = ({caseChart}) => {
       case 'active':
         return (
           <BarChart
-            width={1200}
-            height={500}
+            width={window.innerWidth >= 769 ? 1200 : 400}
+            height={window.innerWidth >= 769 ? 500 : 300}
             data={stateCaseDetails}
             testid="stateSpecificActiveCasesContainer"
           >
@@ -72,8 +74,8 @@ const StateChart = ({caseChart}) => {
       case 'recovered':
         return (
           <BarChart
-            width={1200}
-            height={500}
+            width={window.innerWidth >= 769 ? 1200 : 400}
+            height={window.innerWidth >= 769 ? 500 : 300}
             data={stateCaseDetails}
             testid="stateSpecificRecoveredCasesContainer"
           >
@@ -86,8 +88,8 @@ const StateChart = ({caseChart}) => {
       case 'deceased':
         return (
           <BarChart
-            width={1200}
-            height={500}
+            width={window.innerWidth >= 769 ? 1200 : 400}
+            height={window.innerWidth >= 769 ? 500 : 300}
             data={stateCaseDetails}
             testid="stateSpecificDeceasedCasesContainer"
           >

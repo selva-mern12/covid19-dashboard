@@ -40,19 +40,19 @@ const StateCaseItem = props => {
                   </button>
                 </p>
               </li>
-              <li>
+              <li className="table-head">
                 <p>Confirmed</p>
               </li>
-              <li>
+              <li className="table-head">
                 <p>Active</p>
               </li>
-              <li>
+              <li className="table-head">
                 <p>Recovered</p>
               </li>
-              <li>
+              <li className="table-head">
                 <p>Deceased</p>
               </li>
-              <li>
+              <li className="table-head">
                 <p>Population</p>
               </li>
             </ul>

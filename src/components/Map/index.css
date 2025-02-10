@@ -17,3 +17,25 @@
   fill: #ffffff;
   stroke: #000000;
 }
+
+@media (max-width: 769px) {
+  .map-container {
+    height: 60vh;
+    width: 100vw;
+    transform-origin: 0 0;
+    transform: scale(0.5);
+  }
+  .india-state {
+    fill: #cecdcd;
+    stroke: #000000;
+  }
+  .india-state:hover {
+    fill: #006284;
+    transition: 0.6s;
+    cursor: pointer;
+  }
+  .active-state {
+    fill: #ffffff;
+    stroke: #000000;
+  }
+}

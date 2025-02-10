@@ -18,6 +18,7 @@
   height: 50px;
   margin: 0px;
   padding: 0px 20px;
+  width: 74vw;
 }
 .state-ut {
   width: 20vw;
@@ -49,15 +50,61 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  width: 75vw;
   margin: 0px;
   padding: 0px;
+  width: 73vw;
 }
 .state-name {
   direction: ltr;
   width: 20vw;
+  transition: all 0.1s ease-in-out;
+}
+.state-name:hover {
+  color: #1e90ff;
+  text-shadow: 0px 0px 10px #000;
 }
 .table-row {
-  width: 10vw;
+  width: 20vw;
   text-align: right;
+}
+
+@media (max-width: 769px) {
+  .state-case-table {
+    width: 95vw;
+    overflow: auto;
+  }
+
+  .table-heading {
+    height: 35px;
+    padding: 0px 10px;
+    width: 93vw;
+  }
+  .state-ut {
+    width: 22vw;
+    font-size: 10px;
+  }
+  .sort-button {
+    font-size: 18px;
+    margin: 0px;
+    padding: 0px;
+  }
+  .table-head {
+    font-size: 10px;
+  }
+  .hr-line {
+    border: 1px solid #475569;
+    width: 100%;
+  }
+  .table-body {
+    width: 93vw;
+    padding: 10px;
+    margin: 0px;
+  }
+  .state-name {
+    font-size: 10px;
+  }
+  .table-row {
+    font-size: 10px;
+    width: 10vw;
+  }
 }

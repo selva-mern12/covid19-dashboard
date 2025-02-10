@@ -11,6 +11,28 @@
   flex-direction: column;
   height: 100vh;
   overflow: auto;
+  overflow-x: hidden;
+}
+
+.vaccination-main-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  margin-top: 10vh;
+}
+
+.vaccination-main-container::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
+.vaccination-main-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.vaccination-main-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .vaccination-heading {
   font-family: Roboto;
@@ -123,4 +145,69 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+}
+@media (max-width: 769px) {
+  .vaccination-main-container {
+    padding: 15px;
+    padding-top: 8vh;
+  }
+  .vaccination-heading {
+    font-size: 25px;
+  }
+  .state-district-drop-down {
+    text-align: center;
+  }
+  .state-district-menu {
+    height: 40px;
+    width: 40%;
+  }
+  .site-dose-inner-container {
+    overflow: auto;
+  }
+  .site-dose-container {
+    border-radius: 7px;
+    padding: 7px;
+    width: 49%;
+  }
+  .site-dose-img {
+    height: 20px;
+    margin-right: 5px;
+  }
+  .site-dose-title {
+    font-size: 13px;
+    line-height: auto;
+  }
+  .site-dose-total {
+    font-size: 12px;
+    line-height: auto;
+  }
+  .site-dose-category-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  .categories {
+    margin-right: 25px;
+  }
+  .site-dose-category {
+    font-size: 10px;
+    line-height: auto;
+    margin: 0px;
+    padding: 0px;
+  }
+  .site-dose-count {
+    font-size: 10px;
+    line-height: auto;
+    margin: 0px;
+    padding: 0px;
+  }
+  .piechart-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .piechart {
+    width: 90%;
+    padding: 0px;
+    margin: 0px;
+  }
 }
