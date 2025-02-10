@@ -34,7 +34,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border: #fff 1px dashed;
+  border: #fff 1px solid;
   border-radius: 3px;
 }
 

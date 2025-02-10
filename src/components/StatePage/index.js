@@ -136,7 +136,7 @@ class StatePage extends Component {
 
     switch (statePageStatus) {
       case pageStatus.loading:
-        return <LoadingView />
+        return <LoadingView dataTestId="timelinesDataLoader" />
       case pageStatus.failure:
         return <FailureView />
       case pageStatus.success:
@@ -168,7 +168,7 @@ class StatePage extends Component {
                 <p className="map-para">(AS of 29 March per source)</p>
               </div>
             </div>
-            <div testid="lineChartsContainer">
+            <div>
               <h1 className="top-district">Top Districts</h1>
               <div className="districtwise-confirmed">
                 <ul
@@ -189,7 +189,7 @@ class StatePage extends Component {
               </div>
             </div>
             <StateChart caseChart={caseChart} />
-            <ul testid="lineChartsContainer">
+            <ul>
               {Object.entries(dateWiseCases).map(([key, value]) => (
                 <LineCharts
                   topic={key}

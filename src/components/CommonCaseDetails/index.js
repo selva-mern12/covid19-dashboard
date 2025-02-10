@@ -73,7 +73,7 @@ const CommonCaseDetails = props => {
             : 'stateSpecificRecoveredCasesContainer'
         }
       >
-        <p className="case-head">Recoverd</p>
+        <p className="case-head">Recovered</p>
         <img
           src="https://i.ibb.co/rHB47jp/recovered-1.png"
           alt={

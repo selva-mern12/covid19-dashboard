@@ -23,16 +23,20 @@ const StateCaseItem = props => {
                 <p className="state-ut">
                   States/UT{' '}
                   <button
-                    testid={sortState ? 'ascendingSort' : 'descendingSort'}
+                    testid="ascendingSort"
                     className="sort-button"
                     type="button"
-                    onClick={() => setSortState(prevState => !prevState)}
+                    onClick={() => setSortState(true)}
                   >
-                    {sortState ? (
-                      <FcGenericSortingAsc style={{paddingTop: '5'}} />
-                    ) : (
-                      <FcGenericSortingDesc style={{paddingTop: '5'}} />
-                    )}
+                    <FcGenericSortingAsc style={{paddingTop: '5'}} />
+                  </button>{' '}
+                  <button
+                    testid="descendingSort"
+                    className="sort-button"
+                    type="button"
+                    onClick={() => setSortState(false)}
+                  >
+                    <FcGenericSortingDesc style={{paddingTop: '5'}} />
                   </button>
                 </p>
               </li>
@@ -43,7 +47,7 @@ const StateCaseItem = props => {
                 <p>Active</p>
               </li>
               <li>
-                <p>Recoverd</p>
+                <p>Recovered</p>
               </li>
               <li>
                 <p>Deceased</p>
@@ -71,7 +75,11 @@ const StateCaseItem = props => {
                 const {confirmed, deceased, recovered, population} = caseDetails
 
                 return (
-                  <li className="table-body" key={state.state_code}>
+                  <li
+                    className="table-body"
+                    key={state.state_code}
+                    testid="stateDetailsLoader"
+                  >
                     <Link
                       to={`/state/${state.state_code}`}
                       className="nav-link"

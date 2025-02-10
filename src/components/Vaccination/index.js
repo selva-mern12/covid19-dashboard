@@ -143,7 +143,7 @@ class Vaccination extends Component {
 
     switch (vaccinationPageStatus) {
       case pageStatus.loading:
-        return <LoadingView />
+        return <LoadingView dataTestId="stateDetailsLoader" />
       case pageStatus.success:
         return (
           <div className="vaccination-main-container">

@@ -13,9 +13,11 @@ const SearchBar = () => {
     <CovidContext.Consumer>
       {value => {
         const {statesList} = value
+        console.log('States List:', statesList)
         const filterStateList = statesList.filter(state =>
           state.state_name.toLowerCase().includes(userSearch.toLowerCase()),
         )
+        console.log('Filtered List:', filterStateList)
         return (
           <div
             onMouseLeave={
@@ -57,7 +59,10 @@ const SearchBar = () => {
                       className="state-code"
                     >
                       <p>{state.state_code}</p>
-                      <BiChevronRightSquare size={17} />
+                      <BiChevronRightSquare
+                        size={17}
+                        testid={`moveTo-${state.state_code}`}
+                      />
                     </Link>
                   </li>
                 ))}
