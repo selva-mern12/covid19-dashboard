@@ -191,7 +191,7 @@ class StatePage extends Component {
             <div className="state-chart-container">
               <StateChart caseChart={caseChart} />
             </div>
-            <ul>
+            <ul testid="lineChartsContainer">
               {Object.entries(dateWiseCases).map(([key, value]) => (
                 <LineCharts
                   topic={key}

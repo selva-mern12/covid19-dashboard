@@ -38,7 +38,6 @@ class Vaccination extends Component {
     )
     if (districtResponse.ok) {
       const districtData = await districtResponse.json()
-
       const updatedDistrictData = districtData?.districts?.map(district => ({
         districtId: district.district_id,
         districtName: district.district_name,
@@ -62,6 +61,7 @@ class Vaccination extends Component {
     if (stateResponse.ok && vaccinationResponse.ok) {
       const stateData = await stateResponse.json()
       const vaccinationData = await vaccinationResponse.json()
+      console.log(vaccinationData)
       const updatedStateData = stateData?.states?.map(state => ({
         stateId: state.state_id,
         stateName: state.state_name,
@@ -192,19 +192,19 @@ class Vaccination extends Component {
                 <div className="site-dose-inner-container">
                   <p className="site-dose-title">Site Conducting Vaccination</p>
                   <p className="site-dose-total">
-                    {vaccinationData?.sessionSiteData?.total_sites}
+                    {vaccinationData?.topBlock?.sessions?.total}
                   </p>
                   <div className="site-dose-category-container">
                     <div className="categories">
                       <p className="site-dose-category">Government</p>
                       <p className="site-dose-count">
-                        {vaccinationData?.sessionSiteData?.govt_sites}
+                        {vaccinationData?.topBlock?.sessions?.govt}
                       </p>
                     </div>
                     <div className="categories">
                       <p className="site-dose-category">Private</p>
                       <p className="site-dose-count">
-                        {vaccinationData?.sessionSiteData?.pvt_sites}
+                        {vaccinationData?.topBlock?.sessions?.govt}
                       </p>
                     </div>
                   </div>
