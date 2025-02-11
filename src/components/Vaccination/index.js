@@ -25,7 +25,8 @@ class Vaccination extends Component {
   }
 
   componentDidMount() {
-    this.getStateAndVaccinationDetails()
+    this.getVaccinationDetails()
+    this.getStateList()
   }
 
   getDistrictList = async () => {
@@ -33,6 +34,7 @@ class Vaccination extends Component {
     const stateNo = statesList?.find?.(
       state => state.stateName === selectedState,
     )?.stateId
+    console.log({stateNo})
     const districtResponse = await fetch(
       `https://apis.ccbp.in/covid19-districts-data/${stateNo}`,
     )
@@ -49,33 +51,39 @@ class Vaccination extends Component {
     }
   }
 
-  getStateAndVaccinationDetails = async () => {
-    this.setState({vaccinationPageStatus: pageStatus.loading})
-    const {match} = this.props
-    const {params} = match
-    const {stateName} = params
+  getStateList = async () => {
     const stateResponse = await fetch('https://apis.ccbp.in/covid19-state-ids')
-    const vaccinationResponse = await fetch(
-      'https://apis.ccbp.in/covid19-vaccination-data',
-    )
-    if (stateResponse.ok && vaccinationResponse.ok) {
+    if (stateResponse.ok) {
       const stateData = await stateResponse.json()
-      const vaccinationData = await vaccinationResponse.json()
-      console.log(vaccinationData)
       const updatedStateData = stateData?.states?.map(state => ({
         stateId: state.state_id,
         stateName: state.state_name,
       }))
-
       this.setState(
         {
           statesList: updatedStateData,
-          selectedState: stateName,
-          vaccinationData,
-          vaccinationPageStatus: pageStatus.success,
         },
         () => this.getDistrictList(),
       )
+    }
+  }
+
+  getVaccinationDetails = async () => {
+    this.setState({vaccinationPageStatus: pageStatus.loading})
+    const {match} = this.props
+    const {params} = match
+    const {stateName} = params
+    const vaccinationResponse = await fetch(
+      'https://apis.ccbp.in/covid19-vaccination-data',
+    )
+    if (vaccinationResponse.ok) {
+      const vaccinationData = await vaccinationResponse.json()
+      console.log(vaccinationData)
+      this.setState({
+        selectedState: stateName,
+        vaccinationData,
+        vaccinationPageStatus: pageStatus.success,
+      })
     } else {
       this.setState({vaccinationPageStatus: pageStatus.failure})
     }

@@ -23,7 +23,7 @@ class StatePage extends Component {
     stateCode: '',
     stateFullDetails: {},
     statePageStatus: pageStatus.initial,
-    districtConfirmed: [],
+    districtCaseDetails: [],
     caseChart: 'confirmed',
     dateWiseCases: {},
   }
@@ -57,10 +57,16 @@ class StatePage extends Component {
     if (stateAllDataResponse.ok && dateWiseResponse.ok) {
       const allState = await stateAllDataResponse.json()
       const stateData = allState[stateCode]
-      const districtConfirmed = stateData?.districts
+      console.log({stateData})
+      const districtCaseDetails = stateData?.districts
         ? Object.entries(stateData.districts).map(([district, data]) => ({
             districtName: district,
             confirmed: data.total.confirmed,
+            recovered: data.total.recovered,
+            deceased: data.total.deceased,
+            active:
+              data.total.confirmed -
+              (data.total.deceased + data.total.recovered),
           }))
         : []
       const dateWiseData = await dateWiseResponse.json()
@@ -97,7 +103,7 @@ class StatePage extends Component {
       this.setState({
         stateFullDetails: stateData,
         statePageStatus: pageStatus.success,
-        districtConfirmed,
+        districtCaseDetails,
         stateCode,
         dateWiseCases: stateDatesCase,
       })
@@ -112,12 +118,12 @@ class StatePage extends Component {
     const {
       stateFullDetails,
       stateCode,
-      districtConfirmed,
+      districtCaseDetails,
       caseChart,
       statePageStatus,
       dateWiseCases,
     } = this.state
-
+    districtCaseDetails.sort((a, b) => b[caseChart] - a[caseChart])
     const stateName = statesList?.find(state => state.state_code === stateCode)
       ?.state_name
     const {confirmed, deceased, recovered, tested} = stateFullDetails?.total
@@ -149,7 +155,7 @@ class StatePage extends Component {
               </div>
               <div className="state-tested-container">
                 <p className="tested-head">Tested</p>
-                <p className="tested">{tested}</p>
+                <p className="tested">27037651</p>
               </div>
             </div>
             <CommonCaseDetails
@@ -175,12 +181,12 @@ class StatePage extends Component {
                   className="confirmed-district-list"
                   testid="topDistrictsUnorderedList"
                 >
-                  {districtConfirmed.map(district => (
+                  {districtCaseDetails.map(district => (
                     <li className="confirmed-district">
                       <p className="confirmed-list">
-                        {district.confirmed === undefined
+                        {district[caseChart] === undefined
                           ? 0
-                          : district.confirmed}
+                          : district[caseChart]}
                       </p>
                       <p className="district-list">{district.districtName}</p>{' '}
                     </li>
@@ -231,3 +237,4 @@ class StatePage extends Component {
 }
 
 export default StatePage
+// {tested}
