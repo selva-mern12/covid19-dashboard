@@ -51,7 +51,6 @@ class Home extends Component {
     const response = await fetch('https://apis.ccbp.in/covid19-state-wise-data')
     if (response.ok) {
       const stateCases = await response.json()
-      console.log(stateCases)
       const totals = this.calculateTotalCases(stateCases)
       this.setState({
         stateCasesDetails: stateCases,

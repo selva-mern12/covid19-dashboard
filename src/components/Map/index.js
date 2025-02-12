@@ -58,7 +58,7 @@ const Map = () => {
               xmlns="http://www.w3.org/2000/svg"
             >
               {statesList.map(state => (
-                <Link to={`/state/${state.state_code}`}>
+                <Link to={`/state/${state.state_code}`} key={state.state_code}>
                   <path
                     d={state.state_path}
                     id={state.state_code}

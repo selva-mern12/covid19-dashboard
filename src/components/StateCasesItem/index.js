@@ -6,7 +6,6 @@ import './index.css'
 
 const StateCaseItem = props => {
   const {stateCasesDetails} = props
-  console.log(stateCasesDetails)
   const [sortState, setSortState] = useState(true)
 
   return (
@@ -19,7 +18,7 @@ const StateCaseItem = props => {
         return (
           <div className="state-case-table" testid="stateWiseCovidDataTable">
             <ul className="table-heading">
-              <li>
+              <li key="states/ut">
                 <p className="state-ut">
                   States/UT{' '}
                   <button
@@ -40,19 +39,19 @@ const StateCaseItem = props => {
                   </button>
                 </p>
               </li>
-              <li className="table-head">
+              <li className="table-head" key="confirmed">
                 <p>Confirmed</p>
               </li>
-              <li className="table-head">
+              <li className="table-head" key="active">
                 <p>Active</p>
               </li>
-              <li className="table-head">
+              <li className="table-head" key="recovered">
                 <p>Recovered</p>
               </li>
-              <li className="table-head">
+              <li className="table-head" key="deceased">
                 <p>Deceased</p>
               </li>
-              <li className="table-head">
+              <li className="table-head" key="population">
                 <p>Population</p>
               </li>
             </ul>

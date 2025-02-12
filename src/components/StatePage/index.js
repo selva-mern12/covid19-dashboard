@@ -29,7 +29,8 @@ class StatePage extends Component {
   }
 
   componentDidMount() {
-    this.getStateDistrictsAndDateWise()
+    this.getStateDateWise()
+    this.getDistrictsDateWise()
   }
 
   componentDidUpdate(prevProps) {
@@ -39,11 +40,12 @@ class StatePage extends Component {
     const previousStateCode = prevProps.match.params.stateCode
 
     if (currentStateCode !== previousStateCode) {
-      this.getStateDistrictsAndDateWise()
+      this.getStateDateWise()
+      this.getDistrictsDateWise()
     }
   }
 
-  getStateDistrictsAndDateWise = async () => {
+  getStateDateWise = async () => {
     this.setState({statePageStatus: pageStatus.loading})
     const {match} = this.props
     const {params} = match
@@ -51,13 +53,9 @@ class StatePage extends Component {
     const stateAllDataResponse = await fetch(
       'https://apis.ccbp.in/covid19-state-wise-data',
     )
-    const dateWiseResponse = await fetch(
-      `https://apis.ccbp.in/covid19-timelines-data/${stateCode}`,
-    )
-    if (stateAllDataResponse.ok && dateWiseResponse.ok) {
+    if (stateAllDataResponse.ok) {
       const allState = await stateAllDataResponse.json()
       const stateData = allState[stateCode]
-      console.log({stateData})
       const districtCaseDetails = stateData?.districts
         ? Object.entries(stateData.districts).map(([district, data]) => ({
             districtName: district,
@@ -69,6 +67,26 @@ class StatePage extends Component {
               (data.total.deceased + data.total.recovered),
           }))
         : []
+
+      this.setState({
+        stateFullDetails: stateData,
+        statePageStatus: pageStatus.success,
+        districtCaseDetails,
+        stateCode,
+      })
+    } else {
+      this.setState({statePageStatus: pageStatus.failure})
+    }
+  }
+
+  getDistrictsDateWise = async () => {
+    const {match} = this.props
+    const {params} = match
+    const {stateCode} = params
+    const dateWiseResponse = await fetch(
+      `https://apis.ccbp.in/covid19-timelines-data/${stateCode}`,
+    )
+    if (dateWiseResponse.ok) {
       const dateWiseData = await dateWiseResponse.json()
       const dateWiseCases = dateWiseData[stateCode].dates
       const stateDatesCase = Object.entries(dateWiseCases).reduce(
@@ -101,14 +119,8 @@ class StatePage extends Component {
       )
 
       this.setState({
-        stateFullDetails: stateData,
-        statePageStatus: pageStatus.success,
-        districtCaseDetails,
-        stateCode,
         dateWiseCases: stateDatesCase,
       })
-    } else {
-      this.setState({statePageStatus: pageStatus.failure})
     }
   }
 
@@ -142,7 +154,7 @@ class StatePage extends Component {
 
     switch (statePageStatus) {
       case pageStatus.loading:
-        return <LoadingView dataTestId="timelinesDataLoader" />
+        return <LoadingView dataTestId="stateDetailsLoader" />
       case pageStatus.failure:
         return <FailureView />
       case pageStatus.success:
@@ -155,7 +167,7 @@ class StatePage extends Component {
               </div>
               <div className="state-tested-container">
                 <p className="tested-head">Tested</p>
-                <p className="tested">27037651</p>
+                <p className="tested">{tested}</p>
               </div>
             </div>
             <CommonCaseDetails
@@ -182,11 +194,12 @@ class StatePage extends Component {
                   testid="topDistrictsUnorderedList"
                 >
                   {districtCaseDetails.map(district => (
-                    <li className="confirmed-district">
+                    <li
+                      className="confirmed-district"
+                      key={district.districtName}
+                    >
                       <p className="confirmed-list">
-                        {district[caseChart] === undefined
-                          ? 0
-                          : district[caseChart]}
+                        {district[caseChart] ? district[caseChart] : 0}
                       </p>
                       <p className="district-list">{district.districtName}</p>{' '}
                     </li>
@@ -201,6 +214,7 @@ class StatePage extends Component {
               {Object.entries(dateWiseCases).map(([key, value]) => (
                 <LineCharts
                   topic={key}
+                  key={key}
                   dateCaseDetails={value}
                   color={dateWiseCasesColors[key]}
                 />
@@ -237,4 +251,3 @@ class StatePage extends Component {
 }
 
 export default StatePage
-// {tested}

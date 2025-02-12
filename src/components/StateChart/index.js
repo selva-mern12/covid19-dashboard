@@ -9,6 +9,8 @@ const StateChart = ({caseChart}) => {
   const {stateCode = 'TN'} = useParams()
 
   useEffect(() => {
+    let isMounted = true
+
     const getStateCaseDetails = async () => {
       const response = await fetch(
         `https://apis.ccbp.in/covid19-timelines-data/${stateCode}`,
@@ -17,8 +19,10 @@ const StateChart = ({caseChart}) => {
         const fetchData = await response.json()
         const stateDetails = fetchData[stateCode]
         const {dates} = stateDetails
-
-        const casesData = Object.entries(dates).map(([date, data]) => {
+        const datesArray = Object.entries(dates)
+        const last10Entries = datesArray.slice(-10)
+        const last10Dates = Object.fromEntries(last10Entries)
+        const casesData = Object.entries(last10Dates).map(([date, data]) => {
           const parsedDate = new Date(date)
           const monthName = parsedDate.toLocaleString('default', {
             month: 'short',
@@ -34,11 +38,17 @@ const StateChart = ({caseChart}) => {
           }
         })
 
-        setStateCaseDetails(casesData)
+        if (isMounted) {
+          setStateCaseDetails(casesData)
+        }
       }
     }
 
     getStateCaseDetails()
+
+    return () => {
+      isMounted = false // Cleanup function to prevent updating state on unmounted component
+    }
   }, [stateCode])
 
   const renderStateChart = () => {
@@ -51,7 +61,7 @@ const StateChart = ({caseChart}) => {
             data={stateCaseDetails}
             testid="stateSpecificConfirmedCasesContainer"
           >
-            <XAxis dataKey="date" interval={10} />
+            <XAxis dataKey="date" />
             <YAxis tickFormatter={value => `${value / 1000}k`} />
             <Tooltip />
             <Bar dataKey="confirmed" fill="#9A0E31" />
@@ -65,7 +75,7 @@ const StateChart = ({caseChart}) => {
             data={stateCaseDetails}
             testid="stateSpecificActiveCasesContainer"
           >
-            <XAxis dataKey="date" interval={10} />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Bar dataKey="active" fill="#0A4FA0" />
@@ -79,7 +89,7 @@ const StateChart = ({caseChart}) => {
             data={stateCaseDetails}
             testid="stateSpecificRecoveredCasesContainer"
           >
-            <XAxis dataKey="date" interval={10} />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Bar dataKey="recovered" fill="#216837" />
@@ -93,7 +103,7 @@ const StateChart = ({caseChart}) => {
             data={stateCaseDetails}
             testid="stateSpecificDeceasedCasesContainer"
           >
-            <XAxis dataKey="date" interval={10} />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Bar dataKey="deceased" fill="#474C57" />

@@ -1,6 +1,5 @@
 const CommonCaseDetails = props => {
   const {caseDetails, getCase = null, caseChart = undefined, country} = props
-  console.log(caseChart)
   const {confirmed, deceased, recovered, active} = caseDetails
   return (
     <div className="case-group">
