@@ -25,9 +25,3 @@ const App = () => {
 }
 
 export default App
-
-// import VaccinationLineChart from './components/PieCharts'
-
-// const App = () => <VaccinationLineChart />
-
-// export default App

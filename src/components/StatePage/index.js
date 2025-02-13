@@ -6,7 +6,7 @@ import CovidContext from '../../Context/CovidContext'
 import CommonCaseDetails from '../CommonCaseDetails'
 import {LoadingView, FailureView} from '../UnsuccessPage'
 import StateChart from '../StateChart'
-import {LineCharts} from '../PieCharts'
+import LineCharts from '../LineChart'
 import Map from '../Map'
 
 import './index.css'
@@ -25,12 +25,10 @@ class StatePage extends Component {
     statePageStatus: pageStatus.initial,
     districtCaseDetails: [],
     caseChart: 'confirmed',
-    dateWiseCases: {},
   }
 
   componentDidMount() {
     this.getStateDateWise()
-    this.getDistrictsDateWise()
   }
 
   componentDidUpdate(prevProps) {
@@ -41,7 +39,6 @@ class StatePage extends Component {
 
     if (currentStateCode !== previousStateCode) {
       this.getStateDateWise()
-      this.getDistrictsDateWise()
     }
   }
 
@@ -67,6 +64,7 @@ class StatePage extends Component {
               (data.total.deceased + data.total.recovered),
           }))
         : []
+      console.log(districtCaseDetails)
 
       this.setState({
         stateFullDetails: stateData,
@@ -79,51 +77,6 @@ class StatePage extends Component {
     }
   }
 
-  getDistrictsDateWise = async () => {
-    const {match} = this.props
-    const {params} = match
-    const {stateCode} = params
-    const dateWiseResponse = await fetch(
-      `https://apis.ccbp.in/covid19-timelines-data/${stateCode}`,
-    )
-    if (dateWiseResponse.ok) {
-      const dateWiseData = await dateWiseResponse.json()
-      const dateWiseCases = dateWiseData[stateCode].dates
-      const stateDatesCase = Object.entries(dateWiseCases).reduce(
-        (acc, [key, value]) => {
-          const changeDate = new Date(key)
-          const formatDate = `${changeDate.getDate()} ${changeDate.toLocaleString(
-            'default',
-            {month: 'short'},
-          )}\n${changeDate.getFullYear()}`
-          acc.confirmed.push({date: formatDate, cases: value.total.confirmed})
-          acc['Total Active'].push({
-            date: formatDate,
-            cases:
-              value.total.confirmed -
-              (value.total.deceased + value.total.recovered),
-          })
-          acc.recovered.push({date: formatDate, cases: value.total.recovered})
-          acc.deceased.push({date: formatDate, cases: value.total.deceased})
-          acc.teste.push({date: formatDate, cases: value.total.tested})
-
-          return acc
-        },
-        {
-          confirmed: [],
-          'Total Active': [],
-          recovered: [],
-          deceased: [],
-          teste: [],
-        },
-      )
-
-      this.setState({
-        dateWiseCases: stateDatesCase,
-      })
-    }
-  }
-
   getCase = data => this.setState({caseChart: data})
 
   renderStatePage = ({statesList}) => {
@@ -133,7 +86,6 @@ class StatePage extends Component {
       districtCaseDetails,
       caseChart,
       statePageStatus,
-      dateWiseCases,
     } = this.state
     districtCaseDetails.sort((a, b) => b[caseChart] - a[caseChart])
     const stateName = statesList?.find(state => state.state_code === stateCode)
@@ -144,13 +96,6 @@ class StatePage extends Component {
     const active = confirmed - (deceased + recovered)
     const caseDetails = {confirmed, deceased, recovered, active}
     const {population} = stateFullDetails?.meta ? stateFullDetails.meta : {}
-    const dateWiseCasesColors = {
-      confirmed: '#FF073A',
-      'Total Active': '#007BFF',
-      recovered: '#27A243',
-      deceased: '#6C757D',
-      teste: '#9673B9',
-    }
 
     switch (statePageStatus) {
       case pageStatus.loading:
@@ -167,7 +112,9 @@ class StatePage extends Component {
               </div>
               <div className="state-tested-container">
                 <p className="tested-head">Tested</p>
-                <p className="tested">{tested}</p>
+                <p className="tested" testid="totalTestedCases">
+                  {tested}
+                </p>
               </div>
             </div>
             <CommonCaseDetails
@@ -182,12 +129,13 @@ class StatePage extends Component {
                 <p className="map-para">Population</p>
                 <p className="map-head">{population}</p>
                 <p className="map-para">Tested</p>
-                <p className="map-head">{tested}</p>
                 <p className="map-para">(AS of 29 March per source)</p>
               </div>
             </div>
-            <div>
-              <h1 className="top-district">Top Districts</h1>
+            <div testid="lineChartsContainer">
+              <h1 className="top-district" testid="Top Districts">
+                Top Districts
+              </h1>
               <div className="districtwise-confirmed">
                 <ul
                   className="confirmed-district-list"
@@ -206,20 +154,11 @@ class StatePage extends Component {
                   ))}
                 </ul>
               </div>
+              <div className="state-chart-container">
+                <StateChart caseChart={caseChart} />
+              </div>
+              <LineCharts />
             </div>
-            <div className="state-chart-container">
-              <StateChart caseChart={caseChart} />
-            </div>
-            <ul testid="lineChartsContainer">
-              {Object.entries(dateWiseCases).map(([key, value]) => (
-                <LineCharts
-                  topic={key}
-                  key={key}
-                  dateCaseDetails={value}
-                  color={dateWiseCasesColors[key]}
-                />
-              ))}
-            </ul>
             <Footer />
           </div>
         )
@@ -251,3 +190,5 @@ class StatePage extends Component {
 }
 
 export default StatePage
+
+// <p className="map-head">{tested}</p>

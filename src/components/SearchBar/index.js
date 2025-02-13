@@ -6,10 +6,10 @@ import CovidContext from '../../Context/CovidContext'
 import './index.css'
 
 class SearchBar extends Component {
-  state = {userSearch: '', isShowSearchBar: false}
+  state = {userSearch: ''}
 
   render() {
-    const {userSearch, isShowSearchBar} = this.state
+    const {userSearch} = this.state
     return (
       <CovidContext.Consumer>
         {value => {
@@ -18,17 +18,11 @@ class SearchBar extends Component {
             state.state_name.toLowerCase().includes(userSearch.toLowerCase()),
           )
           return (
-            <div
-              onMouseLeave={
-                userSearch === ''
-                  ? () => this.setState({isShowSearchBar: false})
-                  : undefined
-              }
-            >
+            <div>
               <div
                 className="search-container"
                 style={
-                  isShowSearchBar
+                  userSearch !== ''
                     ? {borderBottom: 'none', borderRadius: '5px 5px 0px 0px'}
                     : undefined
                 }
@@ -41,11 +35,10 @@ class SearchBar extends Component {
                   onChange={event =>
                     this.setState({userSearch: event.target.value})
                   }
-                  onMouseMove={() => this.setState({isShowSearchBar: true})}
                   placeholder="Enter the State..."
                 />
               </div>
-              {isShowSearchBar && (
+              {userSearch !== '' && (
                 <ul
                   className="search-bar-container"
                   testid="searchResultsUnorderedList"

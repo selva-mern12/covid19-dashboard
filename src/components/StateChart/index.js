@@ -1,17 +1,27 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 import {BarChart, Bar, XAxis, YAxis, Tooltip} from 'recharts'
+import {LoadingView, FailureView} from '../UnsuccessPage'
 
 import './index.css'
 
+const pageStatus = {
+  initial: 'INITIAL',
+  loading: 'LOADING',
+  failure: 'FAILURE',
+  success: 'SUCCESS',
+}
+
 const StateChart = ({caseChart}) => {
   const [stateCaseDetails, setStateCaseDetails] = useState([])
+  const [stateChartStatus, setStateChartStatus] = useState(pageStatus.initial)
   const {stateCode = 'TN'} = useParams()
 
   useEffect(() => {
     let isMounted = true
 
     const getStateCaseDetails = async () => {
+      setStateChartStatus(pageStatus.loading)
       const response = await fetch(
         `https://apis.ccbp.in/covid19-timelines-data/${stateCode}`,
       )
@@ -40,18 +50,21 @@ const StateChart = ({caseChart}) => {
 
         if (isMounted) {
           setStateCaseDetails(casesData)
+          setStateChartStatus(pageStatus.success)
         }
+      } else {
+        setStateChartStatus(pageStatus.loading)
       }
     }
 
     getStateCaseDetails()
 
     return () => {
-      isMounted = false // Cleanup function to prevent updating state on unmounted component
+      isMounted = false
     }
   }, [stateCode])
 
-  const renderStateChart = () => {
+  const renderCaseWise = () => {
     switch (caseChart) {
       case 'confirmed':
         return (
@@ -109,6 +122,19 @@ const StateChart = ({caseChart}) => {
             <Bar dataKey="deceased" fill="#474C57" />
           </BarChart>
         )
+      default:
+        return null
+    }
+  }
+
+  const renderStateChart = () => {
+    switch (stateChartStatus) {
+      case pageStatus.loading:
+        return <LoadingView dataTestId="timelinesDataLoader" />
+      case pageStatus.success:
+        return renderCaseWise()
+      case pageStatus.failure:
+        return <FailureView />
       default:
         return null
     }

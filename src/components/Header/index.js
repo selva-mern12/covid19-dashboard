@@ -8,20 +8,26 @@ const Header = ({vaccination, stateName, vaccinationPage}) => (
         COVID19<span className="header-india">INDIA</span>
       </h1>
     </Link>
-    <nav className="nav-container">
-      <Link to="/" className="nav-link">
-        Home
-      </Link>
-      {vaccination && (
-        <Link to={`/vaccination/${stateName}`} className="nav-link">
-          Vaccination
+    <ul className="nav-container">
+      <li>
+        <Link to="/" className="nav-link">
+          Home
         </Link>
+      </li>
+      {vaccination && (
+        <li>
+          <Link to={`/vaccination/${stateName}`} className="nav-link">
+            Vaccination
+          </Link>
+        </li>
       )}
-      {vaccinationPage && <p className="nav-link">Vaccination</p>}
-      <Link to="/about" className="nav-link">
-        About
-      </Link>
-    </nav>
+      {vaccinationPage && <li className="nav-link">Vaccination</li>}
+      <li>
+        <Link to="/about" className="nav-link">
+          About
+        </Link>
+      </li>
+    </ul>
   </div>
 )
 
