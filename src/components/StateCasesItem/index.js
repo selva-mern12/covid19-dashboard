@@ -22,7 +22,7 @@ const StateCaseItem = props => {
         return (
           <div className="state-case-table" testid="stateWiseCovidDataTable">
             <ul className="table-container">
-              <li className="table-heading">
+              <div className="table-heading">
                 <div className="state-ut">
                   States/UT{' '}
                   <button
@@ -47,7 +47,7 @@ const StateCaseItem = props => {
                 <p className="table-head">Recovered</p>
                 <p className="table-head">Deceased</p>
                 <p className="table-head">Population</p>
-              </li>
+              </div>
               <hr className="hr-line" />
               {sortedState.map(state => {
                 const stateDetails = stateCasesDetails[state.state_code] || {}
